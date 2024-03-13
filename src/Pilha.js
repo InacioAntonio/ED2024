@@ -1,47 +1,47 @@
 class Pilha {
   constructor(tam = 5) {
-    this.items = [];
+    this.dados = [];
     this.tam = tam;
-    this.ultimo = 0;
+    this.topo = 0;
   }
-
-  push(elemento) {
+  push(dado) {
     if (!this.isFull()) {
-      this.items[this.ultimo++] = elemento;
+      this.dados[this.topo++] = dado;
       return;
     }
     throw new Error("Stackoverflow");
   }
   pop() {
-    if (!this.isEmpty()) {
-      this.ultimo--;
-      return;
-    }
-    throw new Error("Stackunderflow");
-  }
-  size() {
-    return this.ultimo;
-  }
-  clear() {
-    this.ultimo = 0;
-  }
-  isFull() {
-    return this.ultimo === this.tam;
-  }
-  isEmpty() {
-    return this.size() === 0;
-  }
-  toString() {
-    let aux = "";
-    for (let i = 0; i < 5; i++) {
-      this.items[i] += aux;
+    if (this.isEmpty()) {
+      throw new Error("Stackunderflow");
+    } else {
+      this.topo--;
     }
   }
   top() {
     if (!this.isEmpty()) {
-      return this.items[this.ultimo - 1];
+      return this.dados[this.topo - 1];
     }
     throw new Error("Empty stack");
+  }
+  clear() {
+    this.topo = 0;
+  }
+  size() {
+    return this.topo;
+  }
+  toString() {
+    let resultado = "";
+    for (let i = 0; i <= this.topo; i++) {
+      resultado += this.dados[i];
+    }
+    return resultado;
+  }
+  isEmpty() {
+    return this.size() === 0;
+  }
+  isFull() {
+    return this.size() === this.tam;
   }
 }
 
